@@ -1,0 +1,16 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Space:wght@400;700;900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap");
+
+:root {
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #fbfef9;
+  background-color: #0d090a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
