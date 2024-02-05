@@ -93,7 +93,8 @@ function App() {
   }, []);
 
   return (
-    <div className="body">
+    // <div className="body">
+    <div className="app">
       <p
         style={{
           color: "#403b7c",

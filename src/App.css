@@ -1,5 +1,5 @@
-.body {
-  display: flex;
+.app {
+  /* display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -7,7 +7,18 @@
   padding: 2rem;
   padding-top: 30vh;
   overflow-x: hidden;
+  overflow-y: scroll; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   overflow-y: scroll;
+  overflow-x: hidden;
+  /* height: 100vh; */
+  width: 100vw;
+  padding: 2rem;
+  box-sizing: border-box;
+  padding-top: 30vh;
 }
 
 .hi {
@@ -41,6 +52,9 @@
   color: #736ced;
   margin-bottom: 0;
   transition: 0.2s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .socials-icon:hover {
@@ -118,7 +132,7 @@
   font-weight: 700;
   margin: 0;
   padding: 0;
-  margin-top: -0.25rem;
+  margin-top: -0.5rem;
   /* margin-bottom: 0.5rem; */
   color: #9f9fed;
 }
@@ -130,7 +144,8 @@
   padding: 0;
   /* margin-top: -0.25rem; */
   color: #736ced;
-  margin-top: -0.5rem;
+  /* margin-top: -0.25rem; */
+  line-height: 1;
 }
 
 .card-items {
