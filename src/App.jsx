@@ -26,6 +26,11 @@ function App() {
       desc: "self-taught ⋅ 2021 - present ⋅ frontend, backend, discord bots",
     },
     {
+      icon: "ts",
+      title: "typescript",
+      desc: "trying (failing) to learn right now ⋅ my smooth vanilla js brain is awful at this send help",
+    },
+    {
       icon: "react",
       title: "react.js & react native",
       desc: "self-taught ⋅ 2021 - present",
@@ -154,7 +159,7 @@ function App() {
               src={`https://skillicons.dev/icons?i=${exp.icon}`}
               alt={exp.title}
               className="experience-icon"
-              title="icon courtesy of skillicons.dev"
+              title="icon courtesy of skillicons.dev, thank them very much"
             />
             <div className="experience-text">
               <h2 className="card-title">{exp.title}</h2>
@@ -212,7 +217,9 @@ function App() {
       >
         click for more magnus
       </p>
-      <h1 className="section-heading">projects & stuff coming soon</h1>
+      <h1 className="section-heading">
+        projects & other actual portfolio things coming soon
+      </h1>
       <a
         href="https://cooltext.com/Logo-Design-Burning"
         target="_blank"
