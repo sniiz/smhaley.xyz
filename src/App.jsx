@@ -193,6 +193,7 @@ function App() {
                 opacity: isMagnusLoading ? "0.8" : "inherit",
                 transition: "0.1s",
               }}
+              title={magnus?.description}
             />
           )}
         </ProgressiveImage>
