@@ -4,9 +4,10 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import { RefreshCw, Mail, GitHub, Twitter, Youtube } from "react-feather";
 
 function App() {
-  const [screen, setScreen] = useState("projects");
+  // const [screen, setScreen] = useState("projects"); // bad idea, don't do this
   const [magnus, setMagnus] = useState({});
   const [isMagnusLoading, setIsMagnusLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
   const [aka, setAka] = useState("");
 
   const experience = [
@@ -75,7 +76,7 @@ function App() {
       title: "blender",
       desc: "self-taught ⋅ 2020 - present",
     },
-  ];
+  ]; // TODO move to backend
 
   useEffect(() => {
     // magnus is my cat
@@ -86,12 +87,19 @@ function App() {
         setMagnus(data.data);
         setIsMagnusLoading(false);
       });
+
+    // fetch("https://api.smhaley.xyz/pf/projects") // TODO
+    // don't want people spamming my api for now
+    // actually no who am i kidding there are no people
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setProjects(data.data);
+    //   });
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const akas = ["sniiz", "smhaley", "cannotofbeans"];
-
       setAka((prev) => akas[akas.indexOf(prev) + 1] || akas[0]);
     }, 3000);
     return () => clearInterval(interval);
@@ -114,7 +122,7 @@ function App() {
       </p>
       <div className="socials-container">
         <a
-          href="mailto:haley@program.mr"
+          href="https://api.smhaley.xyz/link/email"
           className="socials-icon"
           target="_blank"
           rel="noreferrer"
@@ -123,7 +131,7 @@ function App() {
           <Mail />
         </a>
         <a
-          href="https://github.com/sniiz"
+          href="https://api.smhaley.xyz/link/github"
           className="socials-icon"
           target="_blank"
           rel="noreferrer"
@@ -131,7 +139,7 @@ function App() {
           <GitHub />
         </a>
         <a
-          href="https://twitter.com/_sniiz_"
+          href="https://api.smhaley.xyz/link/twitter"
           className="socials-icon"
           target="_blank"
           rel="noreferrer"
@@ -139,7 +147,7 @@ function App() {
           <Twitter />
         </a>
         <a
-          href="https://www.youtube.com/channel/UCP6GYVAaIKGqvnhOV_ofLcQ"
+          href="https://api.smhaley.xyz/link/youtube"
           className="socials-icon"
           target="_blank"
           rel="noreferrer"
