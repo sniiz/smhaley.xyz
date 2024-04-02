@@ -32,6 +32,16 @@ function App() {
       desc: "trying (failing) to learn right now ⋅ my smooth vanilla js brain is awful at this send help",
     },
     {
+      icon: "mongodb",
+      title: "mongodb",
+      desc: "self-taught ⋅ 2024 - present",
+    },
+    {
+      icon: "rust",
+      title: "rust",
+      desc: "learning right now ⋅ it's hard and kinda weird but i like it ⋅ backend",
+    },
+    {
       icon: "react",
       title: "react.js & react native",
       desc: "self-taught ⋅ 2021 - present",
