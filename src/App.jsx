@@ -236,7 +236,7 @@ function App() {
         click for more magnus
       </p>
       <h1 className="section-heading">
-        projects & other actual portfolio things coming soon
+        projects & other actual portfolio things coming eventually
       </h1>
       <a
         href="https://cooltext.com/Logo-Design-Burning"
