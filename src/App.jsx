@@ -52,6 +52,11 @@ function App() {
       desc: "self-taught ⋅ 2019 - present",
     },
     {
+      icon: "tailwind",
+      title: "tailwind",
+      desc: "self-taught ⋅ 2024 - present",
+    },
+    {
       icon: "git",
       title: "git",
       desc: "self-taught ⋅ 2020 - present",
