@@ -29,7 +29,7 @@ function App() {
     {
       icon: "ts",
       title: "typescript",
-      desc: "trying (failing) to learn right now ⋅ my smooth vanilla js brain is awful at this send help",
+      desc: "trying (failing) to learn right now",
     },
     {
       icon: "mongodb",
@@ -39,7 +39,7 @@ function App() {
     {
       icon: "rust",
       title: "rust",
-      desc: "learning right now ⋅ it's hard and kinda weird but i like it ⋅ backend",
+      desc: "learning right now ⋅ feels weird for a py/js plebian like me but it's going pretty well",
     },
     {
       icon: "react",
