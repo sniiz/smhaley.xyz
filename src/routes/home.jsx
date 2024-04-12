@@ -369,7 +369,7 @@ export default function Home() {
   return (
     <>
       <title>haley summerfield | {selectedButton}</title>
-      <ModeToggle className="fixed top-4 right-4" />
+      <ModeToggle className="fixed top-4 right-4 z-10" />
       <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-20 pb-40 text-pretty">
         <SkeletonImg
           src="https://github.com/sniiz.png?size=200"
