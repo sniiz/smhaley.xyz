@@ -1,0 +1,11 @@
+User-Agent: *
+Disallow: /.well-known/
+
+User-Agent: GPTBot
+Disallow: /
+
+User-Agent: Yandex
+Disallow: /
+
+User-Agent: Bytespider
+Disallow: /
