@@ -10,6 +10,7 @@ import Autoplay from "embla-carousel-autoplay";
 // import Progressive from "@/components/progressive";
 import SkeletonImg from "@/components/skeleton-image";
 import useOnScreen from "@/components/use-on-screen";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const bullet = (
   <span className="bg-muted-foreground aspect-square p-0.5 rounded-full inline-block mx-1.5" />
@@ -368,6 +369,7 @@ export default function Home() {
   return (
     <>
       <title>haley summerfield | {selectedButton}</title>
+      <ModeToggle className="fixed top-4 right-4" />
       <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-20 pb-40 text-pretty">
         <SkeletonImg
           src="https://github.com/sniiz.png?size=200"
