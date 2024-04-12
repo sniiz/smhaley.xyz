@@ -7,7 +7,8 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import Progressive from "@/components/progressive";
+// import Progressive from "@/components/progressive";
+import SkeletonImg from "@/components/skeleton-image";
 import useOnScreen from "@/components/use-on-screen";
 
 const bullet = (
@@ -65,7 +66,7 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
                             rel="noreferrer"
                             className="h-full transition-all"
                           >
-                            <Progressive
+                            <SkeletonImg
                               src={image.url}
                               placeholder={image.thumbnail}
                               alt={image.alt || project.name}
@@ -167,18 +168,17 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
     case "magnus":
       return magnus ? (
         <>
-          <Progressive
+          <SkeletonImg
             src={magnus.url}
             placeholder={magnus.thumbnail}
             alt={`photo of a cat`}
             title={magnus.description}
-            className={`rounded-lg h-[32rem] object-contain cursor-pointer transition-all ${
+            className={`rounded-lg h-[32rem] object-contain transition-all ${
               loadingMagnus ? "opacity-50" : "opacity-100"
             }`}
-            onClick={() => setRefresh((prev) => !prev)}
           />
           <h1
-            className={`text-xl font-bold mt-4 text-center ${
+            className={`text-xl font-bold mt-4 text-center cursor-pointer ${
               loadingMagnus ? "text-muted-foreground" : "text-card-foreground"
             } transition-all`}
             onClick={() => setRefresh((prev) => !prev)}
@@ -275,8 +275,12 @@ const Tabs = (
 };
 
 export default function Home() {
-  const [projects, setProjects] = useState([]);
-  const [experience, setExperience] = useState([]);
+  const [projects, setProjects] = useState(
+    JSON.parse(localStorage.getItem("projectCache") || "[]") || []
+  );
+  const [experience, setExperience] = useState(
+    JSON.parse(localStorage.getItem("experienceCache") || "[]") || []
+  );
 
   const [selectedButton, setSelectedButton] = useState(
     localStorage.getItem("selectedButton") || "projects"
@@ -292,11 +296,17 @@ export default function Home() {
   useEffect(() => {
     fetch("https://se1.smhaley.xyz/pf/projects")
       .then((response) => response.json())
-      .then((data) => setProjects(data.data));
+      .then((data) => {
+        setProjects(data.data);
+        localStorage.setItem("projectCache", JSON.stringify(data.data));
+      });
 
     fetch("https://se1.smhaley.xyz/pf/experience")
       .then((response) => response.json())
-      .then((data) => setExperience(data));
+      .then((data) => {
+        setExperience(data);
+        localStorage.setItem("experienceCache", JSON.stringify(data));
+      });
   }, []);
 
   useEffect(() => {
@@ -359,10 +369,10 @@ export default function Home() {
     <>
       <title>haley summerfield | {selectedButton}</title>
       <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-20 pb-40 text-pretty">
-        <img
+        <SkeletonImg
           src="https://github.com/sniiz.png?size=200"
           alt="profile picture"
-          className="rounded-lg w-40 h-40 min-w-40 min-h-40"
+          className="rounded-lg w-40 h-40"
         />
         <div className="flex flex-row items-center justify-center space-x-4 mt-8">
           {/* proper design patterns are for losers */}

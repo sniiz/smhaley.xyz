@@ -95,6 +95,11 @@ module.exports = {
             opacity: "0.5",
           },
         },
+        "skeleton-pulse-bg": {
+          "0%": { backgroundColor: "hsl(var(--border))" },
+          "50%": { backgroundColor: "hsl(var(--muted-foreground))" },
+          "100%": { backgroundColor: "hsl(var(--border))" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -104,6 +109,7 @@ module.exports = {
         "chevron-spin": "chevron-spin 2s ease-in-out infinite",
         "tabs-slide": "tabs-slide-in 0.3s ease-in-out",
         "tabs-slide-out": "tabs-slide-out 0.3s ease-out",
+        skeleton: "skeleton-pulse-bg 1.5s ease-in-out infinite",
       },
     },
   },
