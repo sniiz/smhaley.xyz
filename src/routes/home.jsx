@@ -1,3 +1,7 @@
+// I LOVE PUTTING ALL OF MY REACT IN ONE FILE
+// I LOVE GOING AGAINST ESTABLISHED DESIGN PATTERNS
+// I LOVE MAKING MY CODE UNREADABLE AND UNMAINTAINABLE
+
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { Github, Mail, Twitter, Youtube, ArrowUpRight } from "lucide-react";
@@ -129,7 +133,7 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
                   <img
                     src={`https://skillicons.dev/icons?i=${project.technologies.join(
                       ","
-                    )}`}
+                    )}&perline=4`}
                     alt={project.technologies.join(", ")}
                     title={project.technologies.join(", ")}
                     className="inline-block aspect-auto h-8 ml-[auto]"
@@ -231,7 +235,7 @@ const Tabs = (
   return (
     <>
       <div
-        className="border rounded-full mt-8 p-2 flex items-center justify-start space-x-2 bg-tpbg backdrop-blur-lg mb-8"
+        className="border rounded-full mt-8 p-2 flex items-center justify-start space-x-1 bg-tpbg backdrop-blur-lg mb-8"
         ref={tabsRef}
       >
         {buttons.map((button) => (
@@ -241,9 +245,9 @@ const Tabs = (
               selectedButton === button
                 ? "bg-primary text-background"
                 : "text-foreground hover:bg-border"
-            } flex items-center justify-center truncate`}
+            } flex items-center justify-center truncate text-sm md:text-base`}
             onClick={() => {
-              navigator.vibrate(50);
+              // navigator.vibrate(50);
               setSelectedButton(button);
             }}
           >
@@ -253,7 +257,7 @@ const Tabs = (
       </div>
       {showBottomTabs && (
         <div
-          className={`border rounded-full mt-8 p-2 flex items-center justify-start space-x-2 bg-tpbg backdrop-blur-md fixed bottom-2 max-w-full z-10 ${
+          className={`border rounded-full mt-8 p-2 flex items-center justify-start space-x-1 bg-tpbg backdrop-blur-md fixed bottom-2 max-w-full z-10 ${
             animateSlideOut ? "animate-tabs-slide-out" : "animate-tabs-slide"
           }`}
         >
@@ -264,7 +268,7 @@ const Tabs = (
                 selectedButton === button
                   ? "bg-primary text-background"
                   : "text-foreground hover:bg-border"
-              } flex items-center justify-center truncate`}
+              } flex items-center justify-center truncate text-sm md:text-base`}
               onClick={() => setSelectedButton(button)}
             >
               {button}
@@ -276,22 +280,30 @@ const Tabs = (
   );
 };
 
+// this feels like a bad practice or smth idunno
+const bDate = new Date("2008-11-14"); // younger than the wii, opinions invalid
+const age = Math.floor((Date.now() - bDate) / 31556952000);
+
 export default function Home() {
   const [projects, setProjects] = useState(
-    JSON.parse(localStorage.getItem("projectCache") || "[]") || []
+    JSON.parse(localStorage.getItem("projectCache") || "[]") || [] // todo figure out if this is ok
   );
   const [experience, setExperience] = useState(
     JSON.parse(localStorage.getItem("experienceCache") || "[]") || []
   );
 
   const [selectedButton, setSelectedButton] = useState(
-    localStorage.getItem("selectedButton") || "projects"
+    // localStorage.getItem("selectedButton") || "projects"
+    window.location.pathname.slice(1) || "projects"
   );
   const buttons = ["projects", "experience", "magnus"];
   const [isShift, setIsShift] = useState(false);
 
   const tabsRef = useRef();
   const isTabsVisible = useOnScreen(tabsRef);
+
+  const linksRef = useRef();
+  const isLinksVisible = useOnScreen(linksRef);
 
   const navigate = useNavigate();
 
@@ -312,8 +324,15 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("selectedButton", selectedButton);
+    // localStorage.setItem("selectedButton", selectedButton);
+    window.history.pushState({}, "", `/${selectedButton}`);
   }, [selectedButton]);
+
+  useEffect(() => {
+    if (window.location.pathname !== `/${selectedButton}`) {
+      setSelectedButton(window.location.pathname.slice(1));
+    }
+  }, [window.location.pathname]);
 
   useEffect(() => {
     function handleKeyDown(event) {
@@ -371,15 +390,44 @@ export default function Home() {
     <>
       <title>haley summerfield | {selectedButton}</title>
       <ModeToggle className="fixed top-4 right-4 z-10" />
+      {/* {!isLinksVisible && (
+        <nav className="w-full fixed top-0 left-0 z-10 p-4 flex flex-row items-center justify-between">
+          <div className="flex flex-row items-center justify-start space-x-4">
+            <Progressive
+              src="https://github.com/sniiz.png?size=200"
+              placeholder="https://avatars.githubusercontent.com/u/88880069?s=50"
+              alt="profile picture"
+              className="rounded-md w-8 h-8 min-w-8 min-h-8 object-cover cursor-pointer"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            />
+            <a
+              className="border rounded-md p-2 hover:bg-border transition-all bg-card"
+              href="https://se1.smhaley.xyz/link/email"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Mail
+                size={17}
+                className="text-muted-foreground"
+                strokeWidth={1.5}
+              />
+            </a>
+          </div>
+        </nav>
+      )} */}
       <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-20 pb-40 text-pretty">
         <Progressive
           src="https://github.com/sniiz.png?size=200"
           placeholder="https://avatars.githubusercontent.com/u/88880069?s=50"
           alt="profile picture"
           className="rounded-lg w-40 h-40 min-w-40 min-h-40 object-cover"
+          title="art by seita inoue (@tori__kun on ig) (go follow him!!!)"
         />
-        <div className="flex flex-row items-center justify-center space-x-4 mt-8">
-          {/* proper design patterns are for losers */}
+        <div
+          className="flex flex-row items-center justify-center space-x-4 mt-8"
+          ref={linksRef}
+        >
+          {/* there has to be a better way to do this */}
           <a
             className="border rounded-md p-2 hover:bg-border transition-all"
             href="https://se1.smhaley.xyz/link/email"
@@ -433,7 +481,7 @@ export default function Home() {
           hi! i'm haley.
         </h1>
         <p className="text-muted-foreground text-center mx-4 flex items-center justify-center flex-wrap">
-          she/her {bullet} 15yo {bullet} aroace
+          she/her {bullet} {age}yo {bullet} aroace
         </p>
         <p className="text-lg mt-4 text-center mx-4 text-muted-foreground">
           i'm a mostly self-taught fullstack developer. i make stuff for fun.
@@ -478,7 +526,9 @@ export default function Home() {
           >
             tailwindcss
           </a>
-          <br />© 2024 haley summerfield. all rights reserved.
+          .
+          <br />
+          ©️ 2024 haley summerfield. all rights reserved. i think. idk.
         </p>
       </div>
     </>

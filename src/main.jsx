@@ -12,7 +12,7 @@ inject({
   mode: window.location.hostname === "localhost" ? "development" : "production",
 });
 
-const routes = [{ path: "/", element: <Home /> }];
+const routes = [{ path: "/*", element: <Home /> }];
 
 const router = createBrowserRouter(routes);
 
