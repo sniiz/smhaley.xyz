@@ -302,6 +302,18 @@ const bDate = new Date("2008-11-14"); // younger than the wii, opinions invalid
 const age = Math.floor((Date.now() - bDate) / 31556952000);
 
 export default function Home() {
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-20 pb-40 text-pretty">
+      <h1 className="text-4xl font-bold mt-12 text-center mx-4">
+        site temporarily hidden
+      </h1>
+      <p className="text-muted-foreground text-center mx-4 flex items-center justify-center flex-wrap">
+        i apologize for the inconvenience. the site will be back up as soon as
+        possible.
+      </p>
+    </div>
+  );
+
   const [projects, setProjects] = useState(
     JSON.parse(localStorage.getItem("projectCache") || "[]") || [] // todo figure out if this is ok
   );
