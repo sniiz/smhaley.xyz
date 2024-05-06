@@ -15,6 +15,8 @@ import Autoplay from "embla-carousel-autoplay";
 import SkeletonImg from "@/components/skeleton-image";
 import useOnScreen from "@/components/use-on-screen";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "@/components/theme-provider";
 import Progressive from "@/components/progressive";
 
 const bullet = (
@@ -25,6 +27,21 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
   const [magnus, setMagnus] = useState(null);
   const [loadingMagnus, setLoadingMagnus] = useState(true);
   const [refresh, setRefresh] = useState(false);
+
+  const theme = useTheme();
+  const [realTheme, setRealTheme] = useState(theme);
+
+  useEffect(() => {
+    if (theme.theme === "system") {
+      setRealTheme(
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+      );
+    } else {
+      setRealTheme(theme.theme);
+    }
+  }, [theme]);
 
   useEffect(() => {
     setLoadingMagnus(true);
@@ -133,7 +150,7 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
                   <img
                     src={`https://skillicons.dev/icons?i=${project.technologies.join(
                       ","
-                    )}&perline=4`}
+                    )}&perline=4&theme=${realTheme}`}
                     alt={project.technologies.join(", ")}
                     title={project.technologies.join(", ")}
                     className="inline-block aspect-auto h-8 ml-[auto]"
@@ -158,7 +175,7 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
           {experience.map((skill) => (
             <div className="flex flex-row items-center justify-start space-x-4 rounded-lg p-4 border bg-card text-card-foreground">
               <img
-                src={`https://skillicons.dev/icons?i=${skill.icon}`}
+                src={`https://skillicons.dev/icons?i=${skill.icon}&theme=${realTheme}`}
                 alt={skill.icon}
                 title={`${skill.icon} icon, courtesy of skillicons.dev`}
                 className="h-12 aspect-auto rounded-lg"
@@ -481,7 +498,7 @@ export default function Home() {
           hi! i'm haley.
         </h1>
         <p className="text-muted-foreground text-center mx-4 flex items-center justify-center flex-wrap">
-          she/her {bullet} {age}yo {bullet} aroace
+          any pronouns {bullet} {age}yo {bullet} aroace
         </p>
         <p className="text-lg mt-4 text-center mx-4 text-muted-foreground">
           i'm a mostly self-taught fullstack developer. i make stuff for fun.
@@ -528,8 +545,11 @@ export default function Home() {
           </a>
           .
           <br />
-          ©️ 2024 haley summerfield. all rights reserved. i think. idk.
+          ©️ 2024 haley summerfield. all rights reserved. i think. i dunno.
         </p>
+        <Button variant="link" onClick={() => navigate("/console")}>
+          open console
+        </Button>
       </div>
     </>
   );
