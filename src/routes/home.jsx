@@ -547,9 +547,9 @@ export default function Home() {
           <br />
           ©️ 2024 haley summerfield. all rights reserved. i think. i dunno.
         </p>
-        <Button variant="link" onClick={() => navigate("/console")}>
+        {/* <Button variant="link" onClick={() => navigate("/console")}>
           open console
-        </Button>
+        </Button> */}
       </div>
     </>
   );
