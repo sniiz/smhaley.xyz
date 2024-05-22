@@ -513,7 +513,9 @@ export default function Home() {
           any pronouns {bullet} {age}yo {bullet} aroace
         </p>
         <p className="text-lg mt-4 text-center mx-4 text-muted-foreground">
-          i'm a mostly self-taught fullstack developer. i make stuff for fun.
+          {
+            "i'm a mostly self-taught fullstack developer. i make stuff for fun :)"
+          }
         </p>
         {Tabs(
           buttons,
