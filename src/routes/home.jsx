@@ -404,6 +404,7 @@ export default function Home() {
           target="_blank"
           rel="noreferrer"
         >
+          <ArrowUpRight size={16} className="inline-block mr-1" />
           silly version
         </a>
         <Progressive
