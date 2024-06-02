@@ -399,12 +399,12 @@ export default function Home() {
       <ModeToggle className="fixed top-4 right-4 z-10" />
       <div className="w-full h-full flex flex-col items-center justify-center p-4 pb-40 text-pretty">
         <a
-          href="/html"
+          href="/1998.html"
           className="text-muted-foreground text-sm mb-20 hover:underline self-start opacity-25"
           target="_blank"
           rel="noreferrer"
         >
-          1999
+          1998
         </a>
         <Progressive
           src="https://github.com/sniiz.png?size=200"
