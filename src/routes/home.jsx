@@ -404,7 +404,7 @@ export default function Home() {
           target="_blank"
           rel="noreferrer"
         >
-          silly
+          silly version
         </a>
         <Progressive
           src="https://github.com/sniiz.png?size=200"
