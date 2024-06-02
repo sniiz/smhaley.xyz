@@ -4,7 +4,15 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
-import { Github, Mail, Twitter, Youtube, ArrowUpRight } from "lucide-react";
+import {
+  Github,
+  Mail,
+  Twitter,
+  Youtube,
+  ArrowUpRight,
+  Loader2,
+  Disc3,
+} from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -18,6 +26,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import Progressive from "@/components/progressive";
+import { Buffer } from "buffer";
 
 const bullet = (
   <span className="bg-muted-foreground aspect-square p-0.5 rounded-full inline-block mx-1.5" />
@@ -173,7 +182,10 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
       return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:w-3/4 lg:w-4/5 sm:w-full">
           {experience.map((skill) => (
-            <div className="flex flex-row items-center justify-start space-x-4 rounded-lg p-4 border bg-card text-card-foreground">
+            <div
+              className="flex flex-row items-center justify-start space-x-4 rounded-lg p-4 border bg-card text-card-foreground"
+              key={skill.title}
+            >
               <img
                 src={`https://skillicons.dev/icons?i=${skill.icon}&theme=${realTheme}`}
                 alt={skill.icon}
@@ -302,39 +314,30 @@ const bDate = new Date("2008-11-14"); // younger than the wii, opinions invalid
 const age = Math.floor((Date.now() - bDate) / 31556952000);
 
 export default function Home() {
-  // return (
-  //   <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-20 pb-40 text-pretty">
-  //     <h1 className="text-4xl font-bold mt-12 text-center mx-4">
-  //       site temporarily hidden
-  //     </h1>
-  //     <p className="text-muted-foreground text-center mx-4 flex items-center justify-center flex-wrap">
-  //       i apologize for the inconvenience. the site will be back up as soon as
-  //       possible.
-  //     </p>
-  //   </div>
-  // );
-
   const [projects, setProjects] = useState(
     JSON.parse(localStorage.getItem("projectCache") || "[]") || [] // todo figure out if this is ok
   );
   const [experience, setExperience] = useState(
     JSON.parse(localStorage.getItem("experienceCache") || "[]") || []
   );
+  const [tpspihyu, setTpspihyu] = useState(
+    localStorage.getItem("tpspihyu")
+      ? Buffer.from(localStorage.getItem("tpspihyu"), "base64").toString(
+          "ascii"
+        )
+      : null
+  );
 
   const [selectedButton, setSelectedButton] = useState(
     // localStorage.getItem("selectedButton") || "projects"
-    window.location.pathname.slice(1) || "projects"
+    window.location.pathname?.slice?.(1) || "projects"
   );
   const buttons = ["projects", "experience", "magnus"];
-  const [isShift, setIsShift] = useState(false);
 
   const tabsRef = useRef();
   const isTabsVisible = useOnScreen(tabsRef);
 
   const linksRef = useRef();
-  const isLinksVisible = useOnScreen(linksRef);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://se1.smhaley.xyz/pf/projects")
@@ -350,10 +353,22 @@ export default function Home() {
         setExperience(data);
         localStorage.setItem("experienceCache", JSON.stringify(data));
       });
+
+    fetch(
+      "https://se1.smhaley.xyz/pf/temporaryPersonalSecurityPrecautionIHopeYouUnderstand"
+    )
+      .then((response) => response.text())
+      .then((data) => {
+        localStorage.setItem("tpspihyu", data);
+        setTpspihyu(Buffer.from(data, "base64").toString("ascii"));
+      });
   }, []);
 
   useEffect(() => {
-    // localStorage.setItem("selectedButton", selectedButton);
+    if (!buttons.includes(selectedButton)) {
+      setSelectedButton("projects");
+      return () => {};
+    }
     window.history.pushState({}, "", `/${selectedButton}`);
   }, [selectedButton]);
 
@@ -363,94 +378,39 @@ export default function Home() {
     }
   }, [window.location.pathname]);
 
-  useEffect(() => {
-    function handleKeyDown(event) {
-      switch (event.key) {
-        case "ArrowRight":
-          event.preventDefault();
-          if (isShift) {
-            setSelectedButton(
-              buttons[
-                (buttons.indexOf(selectedButton) - 1 + buttons.length) %
-                  buttons.length
-              ]
-            );
-          } else {
-            setSelectedButton(
-              buttons[(buttons.indexOf(selectedButton) + 1) % buttons.length]
-            );
-          }
-          break;
-        case "ArrowLeft":
-          event.preventDefault();
-          setSelectedButton(
-            buttons[
-              (buttons.indexOf(selectedButton) - 1 + buttons.length) %
-                buttons.length
-            ]
-          );
-          break;
-        case "Enter":
-        default:
-          break;
-      }
-    }
-
-    function handleKeyUp(event) {
-      if (event.key === "Shift") {
-        setIsShift(false);
-      }
-    }
-
-    window.addEventListener("keyup", handleKeyUp);
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
-  }, [selectedButton, navigate, buttons, isShift]);
-
-  // useEffect(() => {
-  //   setIsLoading(!(projects.length && experience.length));
-  // }, [projects, experience]);
-
   return (
-    <>
+    <div
+      className={!projects || !experience || !tpspihyu ? "overflow-hidden" : ""}
+    >
+      {!projects || !experience || !tpspihyu ? (
+        // {true ? (
+        <div className="w-full h-screen flex flex-col items-center justify-center text-pretty absolute top-0 left-0 backdrop-blur-xl z-10">
+          <Disc3
+            size={48}
+            className="animate-spin text-muted-foreground"
+            strokeWidth={1}
+          />
+          <p className="text-muted-foreground text-center" ref={tabsRef}>
+            loading stuff
+          </p>
+        </div>
+      ) : null}
       <title>haley summerfield | {selectedButton}</title>
       <ModeToggle className="fixed top-4 right-4 z-10" />
-      {/* {!isLinksVisible && (
-        <nav className="w-full fixed top-0 left-0 z-10 p-4 flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center justify-start space-x-4">
-            <Progressive
-              src="https://github.com/sniiz.png?size=200"
-              placeholder="https://avatars.githubusercontent.com/u/88880069?s=50"
-              alt="profile picture"
-              className="rounded-md w-8 h-8 min-w-8 min-h-8 object-cover cursor-pointer"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            />
-            <a
-              className="border rounded-md p-2 hover:bg-border transition-all bg-card"
-              href="https://se1.smhaley.xyz/link/email"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Mail
-                size={17}
-                className="text-muted-foreground"
-                strokeWidth={1.5}
-              />
-            </a>
-          </div>
-        </nav>
-      )} */}
-      <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-20 pb-40 text-pretty">
+      <div className="w-full h-full flex flex-col items-center justify-center p-4 pb-40 text-pretty">
+        <a
+          href="/html"
+          className="text-muted-foreground text-sm mb-20 hover:underline self-start opacity-25"
+          target="_blank"
+          rel="noreferrer"
+        >
+          1999
+        </a>
         <Progressive
           src="https://github.com/sniiz.png?size=200"
           placeholder="https://avatars.githubusercontent.com/u/88880069?s=50"
           alt="profile picture"
           className="rounded-lg w-40 h-40 min-w-40 min-h-40 object-cover"
-          title="art by seita inoue (@tori__kun on ig) (go follow him!!!)"
         />
         <div
           className="flex flex-row items-center justify-center space-x-4 mt-8"
@@ -510,7 +470,7 @@ export default function Home() {
           hi! i'm haley.
         </h1>
         <p className="text-muted-foreground text-center mx-4 flex items-center justify-center flex-wrap">
-          any pronouns {bullet} {age}yo {bullet} aroace
+          {tpspihyu} {bullet} {age}yo {bullet} aroace
         </p>
         <p className="text-lg mt-4 text-center mx-4 text-muted-foreground">
           {
@@ -561,10 +521,7 @@ export default function Home() {
           <br />
           ©️ 2024 haley summerfield. all rights reserved. i think. i dunno.
         </p>
-        {/* <Button variant="link" onClick={() => navigate("/console")}>
-          open console
-        </Button> */}
       </div>
-    </>
+    </div>
   );
 }

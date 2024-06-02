@@ -4,6 +4,9 @@ import { useState, useEffect, useMemo } from "react";
 
 export default function useOnScreen(ref) {
   const [isIntersecting, setIntersecting] = useState(false);
+  // if (!ref.current) {
+  //   return false;
+  // }
 
   const observer = useMemo(
     () =>
@@ -14,9 +17,12 @@ export default function useOnScreen(ref) {
   );
 
   useEffect(() => {
+    if (!ref.current) {
+      return () => {};
+    }
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, []);
+  }, [ref]);
 
   return isIntersecting;
 }
