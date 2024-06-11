@@ -264,17 +264,17 @@ const Tabs = (
   return (
     <>
       <div
-        className="border rounded-full mt-8 p-2 flex items-center justify-start space-x-1 bg-tpbg backdrop-blur-lg mb-8"
+        className="border rounded-full mt-8 px-1 py-1 flex items-center justify-start space-x-1 bg-tpbg backdrop-blur-lg mb-8 sm:p-2 max-w-full"
         ref={tabsRef}
       >
         {buttons.map((button) => (
           <button
             key={button}
-            className={`px-4 py-2 rounded-full transition-all ${
+            className={`rounded-full transition-all ${
               selectedButton === button
                 ? "bg-primary text-background"
                 : "text-foreground hover:bg-border"
-            } flex items-center justify-center truncate text-sm md:text-base`}
+            } flex items-center justify-center truncate text-xs sm:text-base px-3 sm:px-4 py-2`}
             onClick={() => {
               // navigator.vibrate(50);
               setSelectedButton(button);
@@ -283,26 +283,46 @@ const Tabs = (
             {button}
           </button>
         ))}
+        <a
+          key="survey"
+          className="rounded-full transition-all text-foreground hover:bg-border flex items-center justify-center truncate text-xs sm:text-base px-3 sm:px-4 py-2"
+          href="/experiment"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <ArrowUpRight size={16} className="inline-block mr-1" />
+          survey
+        </a>
       </div>
       {showBottomTabs && (
         <div
-          className={`border rounded-full mt-8 p-2 flex items-center justify-start space-x-1 bg-tpbg backdrop-blur-md fixed bottom-2 max-w-full z-10 ${
+          className={`border rounded-full mt-8 px-1 py-1 flex items-center justify-start space-x-1 bg-tpbg backdrop-blur-md fixed bottom-2 max-w-full z-10 ${
             animateSlideOut ? "animate-tabs-slide-out" : "animate-tabs-slide"
           }`}
         >
           {buttons.map((button) => (
             <button
               key={button}
-              className={`px-4 py-2 rounded-full transition-all ${
+              className={`rounded-full transition-all ${
                 selectedButton === button
                   ? "bg-primary text-background"
                   : "text-foreground hover:bg-border"
-              } flex items-center justify-center truncate text-sm md:text-base`}
+              } flex items-center justify-center truncate text-xs sm:text-base px-3 sm:px-4 py-2`}
               onClick={() => setSelectedButton(button)}
             >
               {button}
             </button>
           ))}
+          <a
+            key="survey"
+            className="rounded-full transition-all text-foreground hover:bg-border flex items-center justify-center truncate text-xs sm:text-base px-3 sm:px-4 py-2"
+            href="/experiment"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ArrowUpRight size={16} className="inline-block mr-1" />
+            survey
+          </a>
         </div>
       )}
     </>
