@@ -428,8 +428,8 @@ export default function Home() {
           silly version
         </a>
         <Progressive
-          src="https://github.com/sniiz.png?size=200"
-          placeholder="https://avatars.githubusercontent.com/u/88880069?s=50"
+          src="https://github.com/sniiz.png?size=1000"
+          placeholder="https://avatars.githubusercontent.com/u/88880069?s=100"
           alt="profile picture"
           className="rounded-lg w-40 h-40 min-w-40 min-h-40 object-cover"
         />
