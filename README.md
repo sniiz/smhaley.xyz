@@ -1,8 +1,21 @@
-# React + Vite
+# smhaley.xyz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+this is my portfolio/personal website. it's not very optimized, but at least it's kinda pretty i guess
 
-Currently, two official plugins are available:
+## i have no idea what to write here
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+i was sick of the default react+vite readme so have my incoherent ramblings instead
+
+## honestly the site is so mediocre i kinda wanna rewrite it a second time
+
+maybe use this as an excuse to learn next or svelte or something
+
+or make a blog with next's ssg
+
+but i have no idea what to write about and i'm not sure if anyone would be willing to suffer through my writing
+
+i mean hey if you made it this far in the readme you might be the target audience
+
+## cool footer here
+
+licensed under the mit license, do whatever you want with it as long as you credit me i guess, i don't really care
