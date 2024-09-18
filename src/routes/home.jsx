@@ -169,11 +169,9 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
             </div>
           ))}
           <div className="flex flex-col rounded-lg p-4 border bg-card text-card-foreground">
-            <h2 className="text-xl font-bold">todo for self</h2>
+            <h2 className="text-xl font-bold">todo: rewrite this (again)</h2>
             <p className="text-muted-foreground text-sm">
-              add more stuff here!!
-              <br />
-              maybe start a blog or something idk
+              cuz in the time since the last rewrite i learned next.js and now transferring 3mb for a website as simple as this is just kinda sad
             </p>
           </div>
         </div>
