@@ -54,7 +54,7 @@ const Body = ({ selectedButton, projects, experience, ...props }) => {
 
   useEffect(() => {
     setLoadingMagnus(true);
-    fetch("https://se1.smhaley.xyz/magni/random")
+    fetch("https://se1.haley.lol/magni/random")
       .then((response) => response.json())
       .then((data) => {
         setMagnus(data.data);
@@ -360,14 +360,14 @@ export default function Home() {
   const linksRef = useRef();
 
   useEffect(() => {
-    fetch("https://se1.smhaley.xyz/pf/projects")
+    fetch("https://se1.haley.lol/pf/projects")
       .then((response) => response.json())
       .then((data) => {
         setProjects(data.data);
         localStorage.setItem("projectCache", JSON.stringify(data.data));
       });
 
-    fetch("https://se1.smhaley.xyz/pf/experience")
+    fetch("https://se1.haley.lol/pf/experience")
       .then((response) => response.json())
       .then((data) => {
         setExperience(data);
@@ -375,7 +375,7 @@ export default function Home() {
       });
 
     fetch(
-      "https://se1.smhaley.xyz/pf/temporaryPersonalSecurityPrecautionIHopeYouUnderstand"
+      "https://se1.haley.lol/pf/temporaryPersonalSecurityPrecautionIHopeYouUnderstand"
     )
       .then((response) => response.text())
       .then((data) => {
@@ -440,7 +440,7 @@ export default function Home() {
           {/* there has to be a better way to do this */}
           <a
             className="border rounded-md p-2 hover:bg-border transition-all"
-            href="https://se1.smhaley.xyz/link/email"
+            href="https://se1.haley.lol/link/email"
             target="_blank"
             rel="noreferrer"
           >
@@ -452,7 +452,7 @@ export default function Home() {
           </a>
           <a
             className="border rounded-md p-2 hover:bg-border transition-all"
-            href="https://se1.smhaley.xyz/link/github"
+            href="https://se1.haley.lol/link/github"
             target="_blank"
             rel="noreferrer"
           >
@@ -464,7 +464,7 @@ export default function Home() {
           </a>
           <a
             className="border rounded-md p-2 hover:bg-border transition-all"
-            href="https://se1.smhaley.xyz/link/twitter"
+            href="https://se1.haley.lol/link/twitter"
             target="_blank"
             rel="noreferrer"
           >
@@ -476,7 +476,7 @@ export default function Home() {
           </a>
           <a
             className="border rounded-md p-2 hover:bg-border transition-all"
-            href="https://se1.smhaley.xyz/link/youtube"
+            href="https://se1.haley.lol/link/youtube"
             target="_blank"
             rel="noreferrer"
           >

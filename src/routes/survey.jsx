@@ -25,8 +25,8 @@ export default function Survey() {
   useEffect(() => {
     (async () => {
       const promises = [
-        fetch("https://se1.smhaley.xyz/pf/survey/check"),
-        fetch("https://se1.smhaley.xyz/pf/survey/number"),
+        fetch("https://se1.haley.lol/pf/survey/check"),
+        fetch("https://se1.haley.lol/pf/survey/number"),
       ];
       const [checkResponse, numberResponse] = await Promise.all(promises);
       const checkData = await checkResponse.json();
@@ -98,7 +98,7 @@ export default function Survey() {
             onClick={() => {
               if (answerValid && answer.length) {
                 setSubmitting(true);
-                fetch("https://se1.smhaley.xyz/pf/survey/submit", {
+                fetch("https://se1.haley.lol/pf/survey/submit", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
